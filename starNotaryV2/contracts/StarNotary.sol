@@ -1,15 +1,18 @@
+// contracts/StarNotary.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-abstract contract StarNotary is ERC721 {
+contract StarNotary is ERC721 {
     struct Star {
         string name;
     }
 
     mapping(uint256 => Star) public tokenIdToStarInfo;
     mapping(uint256 => uint256) public starsForSale;
+
+    constructor() ERC721("StarNotary", "STN") {}
 
     // Create Star using the Struct
     function createStar(string memory _name, uint256 _tokenId) public {
