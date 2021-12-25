@@ -30,7 +30,7 @@ abstract contract StarNotary is ERC721 {
 
     // Function that allows you to convert an address into a payable address
     function _make_payable(address x) internal pure returns (address payable) {
-        return address(uint160(x));
+        return payable(address(uint160(x)));
     }
 
     function buyStar(uint256 _tokenId) public payable {
@@ -45,7 +45,7 @@ abstract contract StarNotary is ERC721 {
         ownerAddressPayable.transfer(starCost);
         
         if (msg.value > starCost) {
-            msg.sender.transfer(msg.value - starCost);
+            payable(msg.sender).transfer(msg.value - starCost);
         }
     }
 }
